@@ -1,0 +1,19 @@
+version: '3'
+services:
+  iris:
+    build: 
+      context: .
+      dockerfile: "Dockerfile-iris"
+    ports:
+      - "52774:52773"
+    hostname: iris
+    command: "-p /data/pwd.txt"
+    volumes:
+       - "/Users/sklingen/wrc/docker/demoapp1/conf:/data:ro"
+       - "/Users/sklingen/wrc/docker/demoapp1/source:/source"
+  webgateway:
+    build:  
+      context: .
+      dockerfile: "Dockerfile-webgateway"
+    ports: 
+      - "8080:80"

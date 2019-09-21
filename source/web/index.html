@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="style.css">
+	<script src="jquery-3.4.1.min.js"></script>
+	<script src="main.js"></script>
+</head>
+<body onload="loadPage()">
+	<div id="userpane">
+		<span id="username"></span>
+	</div>
+	<div id="newmessage">
+		<span class="msgLabel">What are you thinking?</span>
+		<form onsubmit="return postMessage()" autocomplete="off">
+			<input type="text" name="message" />
+			<input type="submit" value="Post"/>
+		</form>
+	</div>
+	<div id="messages">
+	</div>
+</body>
+</html>

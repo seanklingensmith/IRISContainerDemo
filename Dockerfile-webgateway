@@ -1,0 +1,23 @@
+FROM httpd:2.4
+
+ENV ISC_TEMP_DIR=/tmp
+ENV ISC_GW_DIR=/opt/webgateway/bin
+
+COPY ./conf/WebGateway-2019.2.0.107.0-lnxubuntux64/lnxubuntux64/bin/CSPa24*.so $ISC_TEMP_DIR/
+COPY ./conf/CSP.ini $ISC_TEMP_DIR/
+COPY ./conf/httpd-csp.conf $ISC_TEMP_DIR/
+COPY ./conf/pwd.txt $ISC_TEMP_DIR/
+
+RUN mkdir -p $ISC_GW_DIR \
+	&& mv $ISC_TEMP_DIR/CSPa24*.so $ISC_GW_DIR/ \
+	&& mv $ISC_TEMP_DIR/CSP.ini $ISC_GW_DIR/ \
+	&& touch $ISC_GW_DIR/CSP.log \
+	&& sed -i 's/${IRIS_PASSWORD}/'`cat $ISC_TEMP_DIR/pwd.txt`'/g' $ISC_GW_DIR/CSP.ini \
+	&& rm $ISC_TEMP_DIR/pwd.txt \
+	&& chown daemon:daemon $ISC_GW_DIR/CSP* \
+	&& chmod 660 $ISC_GW_DIR/CSP.log \
+	&& chmod 755 $ISC_GW_DIR/*.so \
+	&& mv $ISC_TEMP_DIR/httpd-csp.conf /usr/local/apache2/conf/ \
+	&& echo 'Include conf/httpd-csp.conf' >> /usr/local/apache2/conf/httpd.conf
+
+EXPOSE 80

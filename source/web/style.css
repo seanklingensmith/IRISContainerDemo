@@ -1,0 +1,62 @@
+body {
+	background-color: #ECEEF3;
+	color: black;
+	font-family: "Source Sans Pro",Futura,Arial,sans-serifbody;
+}
+
+input {
+  border: 2px solid black;
+  border-radius: 12px;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#userpane {
+	margin: 5px;
+}
+#userpane span {
+	color: #00AFA9;
+	font-size: 24px;
+}
+#messages {
+	width: 700px;
+}
+
+#newmessage {
+	margin-bottom: 20px;
+}
+
+.message {
+	/*border: 1px solid black;*/
+	background: white;
+	border-radius: 12px;
+	width: 75%;
+	padding: 5px; 
+	margin: 5px;
+
+}
+
+.message .user {
+	color: #00AFA9;
+	float: left;
+	width: 100px;
+	font-size: 20px;
+}
+
+.message .time {
+	color: gray;
+	float: right;
+}
+
+.message .text {
+	display: block;
+}
+
+.msgLabel {
+	display: block;
+	font-size: 24px;
+}
+form {display: inline;}
