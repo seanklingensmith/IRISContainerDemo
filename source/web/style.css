@@ -14,10 +14,22 @@ input {
   cursor: pointer;
 }
 
+input[type=text] {
+	width: 300px;
+}
+
+/*
 #userpane {
 	margin: 5px;
+	display: inline;
 }
 #userpane span {
+	color: #00AFA9;
+	font-size: 24px;
+}
+*/
+
+#username {
 	color: #00AFA9;
 	font-size: 24px;
 }
@@ -27,6 +39,10 @@ input {
 
 #newmessage {
 	margin-bottom: 20px;
+	display: inline;
+}
+#newmessage span {
+	display: inline;
 }
 
 .message {
@@ -59,4 +75,4 @@ input {
 	display: block;
 	font-size: 24px;
 }
-form {display: inline;}
+form {display: block;}

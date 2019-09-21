@@ -11,7 +11,9 @@ function postMessage()
 	let msgText = $("input[name='message']")[0].value
 
 	if (msgText==null || msgText=="")
-		return;
+		return false;
+
+	$("input[name='message']")[0].value='';
 
 	$.ajax("api/message", {
 		data: JSON.stringify({"Text": msgText}),
@@ -38,5 +40,15 @@ function fetchMessages()
 
 function formatTime(time)
 {
-	return time.split(' ')[1];
+	let diff = new Date() - Date.parse(time+' GMT');
+
+	if (diff < 60*1000)
+		return Math.floor(diff/1000) + ' seconds ago';
+	else if (diff < 60*60*1000)
+		return Math.floor(diff/(60*1000)) + ' minutes ago';
+	else if (diff < 24*60*60*1000)
+		return Math.floor(diff/(60*60*1000)) + ' hours ago';
+	else 
+		return Math.floor(diff/(24*60*60*1000)) + ' days ago';
+	return time; //time.split(' ')[1];
 }
