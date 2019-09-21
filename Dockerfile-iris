@@ -1,22 +1,23 @@
 FROM store/intersystems/iris-community:2019.3.0.302.0 As builder
 
-USER irisowner
 ENV BUILD_DIR /tmp/build
 WORKDIR $BUILD_DIR
 COPY --chown=irisowner source ./
 
-RUN mkdir $ISC_PACKAGE_INSTALLDIR/csp/demo/ \
- && cp -R ./web/* $ISC_PACKAGE_INSTALLDIR/csp/demo/ \
- && iris start $ISC_PACKAGE_INSTANCENAME \
+USER root
+RUN mkdir /source && cp -R ./web /source/ 
+
+USER irisowner
+RUN iris start $ISC_PACKAGE_INSTANCENAME \
  && /bin/echo -e "\nDo \$system.OBJ.Load(\"$BUILD_DIR/Demo/Setup.cls\",\"ck\")\nDo ##class(Demo.Setup).Setup()\nHALT" | iris session $ISC_PACKAGE_INSTANCENAME -U USER  \
  && iris stop $ISC_PACKAGE_INSTANCENAME quietly 
 
 FROM store/intersystems/iris-community:2019.3.0.302.0
+USER root
+COPY --from=builder /source/web /source/web/
+
+USER irisowner
 COPY --from=builder $ISC_PACKAGE_INSTALLDIR/csp/bin/CSP.ini $ISC_PACKAGE_INSTALLDIR/csp/bin/CSP.ini
 COPY --from=builder $ISC_PACKAGE_INSTALLDIR/iris.cpf $ISC_PACKAGE_INSTALLDIR/iris.cpf
 COPY --from=builder $ISC_PACKAGE_INSTALLDIR/mgr/IRIS.DAT $ISC_PACKAGE_INSTALLDIR/mgr/IRIS.DAT
-
-#COPY --from=builder $ISC_PACKAGE_INSTALLDIR/mgr/irislib/IRIS.DAT $ISC_PACKAGE_INSTALLDIR/mgr/irislib/IRIS.DAT 
 COPY --from=builder $ISC_PACKAGE_INSTALLDIR/mgr/user/IRIS.DAT $ISC_PACKAGE_INSTALLDIR/mgr/user/IRIS.DAT
-COPY --from=builder $ISC_PACKAGE_INSTALLDIR/csp/demo $ISC_PACKAGE_INSTALLDIR/csp/demo/
-

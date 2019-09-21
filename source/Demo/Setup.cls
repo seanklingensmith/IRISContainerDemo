@@ -13,7 +13,7 @@ Class Demo.Setup
 		<Role Name="DemoApp" Resources="%DB_USER:RWU" />
 		<Namespace Name="${Namespace}" Create="yes" Code="USER" Data="USER">
 			<Configuration></Configuration>
-			<CSPApplication Url="/demo" UseSessionCookie="1" Grant="DemoApp" Directory="${INSTALLDIR}csp/demo"/>
+			<CSPApplication Url="/demo" UseSessionCookie="1" Grant="DemoApp" Directory="/source/web/"/>
 			<CSPApplication Url="/demo/api" CookiePath="/demo" UseSessionCookie="1" Grant="DemoApp" Directory="${INSTALLDIR}csp/demo/api" DispatchClass="Demo.Dispatcher" Recurse="1"/>
 			<Import File="${BuildDir}/Demo" Recurse="1" Flags="cuk" />
 			<Invoke Class="Demo.Setup" Method="GenerateData"/>
