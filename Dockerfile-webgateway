@@ -3,7 +3,7 @@ FROM httpd:2.4
 ENV ISC_TEMP_DIR=/tmp
 ENV ISC_GW_DIR=/opt/webgateway/bin
 
-COPY ./conf/WebGateway-2019.2.0.107.0-lnxubuntux64/lnxubuntux64/bin/CSPa24*.so $ISC_TEMP_DIR/
+COPY ./lib/WebGateway-2019.2.0.107.0-lnxubuntux64/lnxubuntux64/bin/CSPa24*.so $ISC_TEMP_DIR/
 COPY ./conf/CSP.ini $ISC_TEMP_DIR/
 COPY ./conf/httpd-csp.conf $ISC_TEMP_DIR/
 COPY ./conf/pwd.txt $ISC_TEMP_DIR/
