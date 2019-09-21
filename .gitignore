@@ -1,2 +1,4 @@
 conf/pwd.txt
 lib/*
+source/.buildpath
+source/.project
