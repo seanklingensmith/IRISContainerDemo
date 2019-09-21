@@ -15,5 +15,7 @@ services:
     build:  
       context: .
       dockerfile: "Dockerfile-webgateway"
+      args:
+        - LIB_PATH=./lib/WebGateway/bin
     ports: 
       - "8080:80"
