@@ -44,7 +44,7 @@ Class Demo.Setup
 		do ##class(Demo.Message).%KillExtent()
 		
 		for user = "Sean","Joe","Sarah","Alex" {
-			set n = 10+$r(20)
+			set n = 5+$r(10)
 			for i=1:1:n {
 				set msg = ##class(Demo.Message).%New()
 				set msg.Name = user

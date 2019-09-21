@@ -13,6 +13,7 @@ RUN iris start $ISC_PACKAGE_INSTANCENAME \
  && iris stop $ISC_PACKAGE_INSTANCENAME quietly 
 
 FROM store/intersystems/iris-community:2019.3.0.302.0
+
 USER root
 COPY --from=builder /source/web /source/web/
 

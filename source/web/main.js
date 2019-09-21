@@ -50,5 +50,5 @@ function formatTime(time)
 		return Math.floor(diff/(60*60*1000)) + ' hours ago';
 	else 
 		return Math.floor(diff/(24*60*60*1000)) + ' days ago';
-	return time; //time.split(' ')[1];
+	return time; 
 }
